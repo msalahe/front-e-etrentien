@@ -30,6 +30,7 @@
         </div>
     </nav>
     <img id="logo" src="../../Graphics/Logo_1.png">
+    <script defer src="scriptt.js"></script>
 </header>
 <section>
     <div id="container">
@@ -37,23 +38,7 @@
         
         </video>
     </div>
-<<<<<<< HEAD
-    <script defer src="scriptt.js"></script>
-=======
-    <script>
-        var video = document.querySelector("#videoElement");
-
-        if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-         video.srcObject = stream;
-        })
-        .catch(function (err0r) {
-        console.log("Something went wrong!");
-        });
-}
-    </script>
->>>>>>> 6d86f178ccfd8d1af4e03fc5acb1137a19188608
+    
 </section>
 <footer>
   <p id="mentions">© UHA -  Salaheddine Elmamouni, Ismail Brahimi, Jean-Charles Armbruster, Imad Begoud, Joris Georget</p>
