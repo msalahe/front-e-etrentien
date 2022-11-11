@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <title>Quizz Example</title>
+  <title>Bootstrap Example</title>
   <meta charset="utf-8">
  <!-- <meta http-equiv="refresh" [content]="min">-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,20 +16,16 @@
   <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Gruppo&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.js"></script>
+ <script src="https://cdn.jsdelivr.net/gh/ml5js/Intro-ML-Arts-IMA@ml5-build-10-7-19/ml5_build/ml5.min.js"></script>
+ <script src="sketch.js"></script>
   <script src="../public/js/ajax.js"></script>
   <script src="../public/js/test-action.js"></script>
   <script src="../public/js/index.js"></script>
-  <script defer src="face-api.min.js"></script>
-  <script defer src="script.js"></script>
+
   <style>
-    canvas {
-        
-      position: static;
-      padding-left: 800px;
-      margin-top: -50%;
-      width:720;
-      height: 560;
-    }
+       
     .question{
     width: 9%;
     height: 25px;
@@ -512,12 +508,46 @@
      font-size: 17px;
      font-family: 'Poppins', sans-serif; 
  }
+ .qtsbar{
+    text-align: center;
+    width: 6%;
+    height: 30px;
+    padding-top: 0.5%;
+ }
+ 
+
+#canvas{
+
+position: absolute;
+margin-top: -30%;
+margin-left: 60%;
+
+
+}
+
+
+
+#video{
+margin-top: -60%;
+margin-bottom: 5%;
+margin-left: 60%;
+width: 250px;
+height: 250px;
+
+}
+
+
+ 
   </style>
+  <script src="../public/js/main.js"></script>
+  <style src="style.css"></style>
+
+
 </head>
 
-<body onload="main()">
+<body onload="">
 	
-	<h2 class="tempss" id="compteur">03:03</h2>   
+	<h2 class="tempss" id="compteur">00:00</h2>   
 		<div class="divPrincipale">
 			
 <div class="container divp">
@@ -525,52 +555,57 @@
   <div class="panel panel-default paneG">
     <div id ="divC" class="panel-heading pane pa">
 
-		<video id="video" style="padding-left: 350px; margin-left: 180px; margin-top: 360px;" width="720" height="560" autoplay muted></video>
-	
+		<div class="questione qtsbar">1</div>
+        <div class="questione qtsbar">2</div>
+		<div class="questione qtsbar">3</div>
+		<div class="questione qtsbar">4</div>
+		<div class="questione qtsbar">5</div>
+		<div class="questione qtsbar">6</div>
+		<div class="questione qtsbar">7</div>
+        <div class="questione qtsbar">8</div>
+        <div class="questione qtsbar">9</div>
+
+
+
 		 </div>
-     <!--<p class="nomQtest" id="nomQtest">SQLI TEST</p>
-     <button id="btnGet" (click)="start()">Commencer Le Test</button>-->
-     
-	 
-	<div class="panel-body divB "  id="divB">
+     <!--<p class="nomQtest" id="nomQtest">SQLI TEST</p>-->
+     <button id="btnGet" onclick="startquiz()">Commencer Le Test</button>
+     <div id="cnpric" style="display: none;">
+
+	<div class="panel-body divB"  id="divB">
 		<div id="kama">
        <span class="divEntete"> 
-		<p class="numQ">01</p>
+		<p class="numQ" id="numeroto">01</p>
 		<p class="exercice" id="exer">PHP EST LANGUAGE </p>	</span>
-		<img [src]="imagePath" class="image" id="imQ" />
-		<div class="divDomi" id="dom">
-			
 		
-		
-		</div>
-		<div id="div2" class="div2">
-			<span class="responsee">Tapez votre réponse: <input type="text" size="8" id="txt" maxlength="5" name="A1" class="required"></span>
-		</div>
-		<div id="div4" class="div4">
-			<span class="responsee">Tapez votre réponse: <input type="text" size="1" id="txt_1"  maxlength="1" name="A1_1" class="required"></span>
-		</div>
+        <button type="button" class="btn btn-outline-success" onclick="passer()">Suivant<i style="font-size:16px;margin-left: 12%;" class="fa">&#xf105;</i></button>
+
 	<div class="div3" >
-		<input type="radio"  id="huey" name="choix" [value]="choix01" (click)="myfunction()" checked>
+		<input type="radio"  id="huey" name="choix" value="choix01" (click)="myfunction()" checked>
 		<label id="choix1">INTERPRETE</label>
 	  </div>
 	  
 	  <div>
-		<input type="radio" id="dewey" name="choix" [value]="choix02" (click)="myfunction()">
+		<input type="radio" id="dewey" name="choix" value="choix02" (click)="myfunction()">
 		<label id="choix2">COMPILE</label>
 	  </div>
 	  
 	  <div>
-		<input type="radio" id="louie" name="choix" [value]="choix03" (click)="myfunction()">
+		<input type="radio" id="louie" name="choix" value="choix03" (click)="myfunction()">
 		<label id="choix3">INTERPRETE et COMPILE </label>
 	  </div>
 	 
 	  <div>
-		<input type="radio" id="lo" name="choix" value="jenesaispas" (click)="myfunction()">
+		<input type="radio" id="lo" name="choix" value="choix04" (click)="myfunction()">
 		<label id="choix4">Je ne sais pas</label>
+
 	  </div>
+
 	</div>
-		  <button type="button" class="btn btn-outline-success" (click)="myfunction()" id="btn" [disabled]="isau">Suivant<i style="font-size:16px;margin-left: 12%;" class="fa">&#xf105;</i></button>
-		  <p id="affichage">Le Test de {{nomQue}} est fini</p>
+    <p id="affichage">Le Test <span id="name_Test01"></span>   est fini</p>
+</div>
+
+		
 	</div>
 	 </div>
 
@@ -580,7 +615,7 @@
 	   <p class="quizSe">Quiz:1 Session1</p>
 	   <p class="niveau">Niveau Moyenne</p>
 	</div>
-	<p class="name_Test">SQLI TEST</p>
+	<p class="name_Test" id="name_Test02"></p>
 	<div class="LeTemps">
 		<p class="qi">Question</p>
 		<span class="tmp"><img src="../public/assets/images/temps.png" class="imges"/> <p class="nbrQ" id="nbrQQ">01/09</p> </span>
@@ -611,18 +646,10 @@
  <div>
   
   </div>
- <div id="divI">
-	 <p class="pAide">Aide :</p>
-	 <img src="assets\suite_Lettre\tsG.PNG" />
- </div>
+
   
-<ngx-spinner
-bdColor="rgba(51,51,51,0.8)"
-size="medium"
-color="#fff"
-type="ball-scale-multiple"
->
-<p style="font-size: 20px; color: white">{{nomQtest}} Attendez Votre Reponse Aprés {{mm}} s</p>
-</ngx-spinner>
+
+
  </body>
+ 
 </html>
